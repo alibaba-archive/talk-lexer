@@ -1,0 +1,20 @@
+{
+  "version": "0.0.0",
+  "main": "./lib/index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "make test"
+  },
+  "license": "MIT",
+  "name": "lexer",
+  "repository": {
+    "type": "git",
+    "url": "git@code.teambition.com:project/lexer.git"
+  },
+  "devDependencies": {
+    "should": "^4.0.4",
+    "mocha": "^1.21.4"
+  }
+}
