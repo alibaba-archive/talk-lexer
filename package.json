@@ -1,6 +1,6 @@
 {
   "version": "0.0.0",
-  "main": "./lib/index.js",
+  "main": "./lexer.js",
   "directories": {
     "test": "test"
   },
@@ -8,6 +8,7 @@
     "test": "make test"
   },
   "license": "MIT",
+  "author": "teambition",
   "name": "lexer",
   "repository": {
     "type": "git",
@@ -15,6 +16,7 @@
   },
   "devDependencies": {
     "should": "^4.0.4",
-    "mocha": "^1.21.4"
+    "mocha": "^1.21.4",
+    "benchmark": "^1.0.0"
   }
 }

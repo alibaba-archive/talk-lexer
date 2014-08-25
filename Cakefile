@@ -1,1 +1,1 @@
-require('cake-dog')(source: './*.coffee', output: '.')
+require('cake-dog')(source: './lexer.coffee', output: './')

@@ -1,4 +1,4 @@
-all: test
+all: min test
 
 min:
 	uglifyjs lexer.js > lexer.min.js
