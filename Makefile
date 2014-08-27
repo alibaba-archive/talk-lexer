@@ -1,11 +1,12 @@
-all: min test
+all: dist test
 
-min:
-	uglifyjs lexer.js > lexer.min.js
+dist:
+	browserify --bare lib/lexer.js > dist/lexer.js
+	uglifyjs dist/lexer.js > dist/lexer.min.js
 
 test:
 	@NODE_ENV=mocha ./node_modules/.bin/mocha \
 		--require should \
 		--reporter spec test/index.js
 
-.PHONY: all test min
+.PHONY: all test dist

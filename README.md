@@ -5,17 +5,23 @@ Rich text lexer for teambition projects
 
 # Whitelist
 
-- text
+- plain text
 - metion
 
 # Example
 
+```coffeescript
+# html
+# text
+# parseDOM
+```
+
 ```
 # text
-{type: 'text', text: 'hello world'} ==> 'hello world'
+['hello world'] ==> 'hello world'
 
 # metion
-{type: 'metion', text: '@user', data: id: '1'} ==> '<metion data-id="1">@user</metion>'
+[{type: 'metion', text: '@user', data: id: '1'}] ==> '<metion data-id="1">@user</metion>'
 ```
 
 # LICENSE
