@@ -1,5 +1,5 @@
 {
-  "version": "0.0.0",
+  "version": "0.0.1",
   "main": "./lib/lexer.js",
   "directories": {
     "test": "test"
@@ -17,7 +17,9 @@
   "devDependencies": {
     "should": "^4.0.4",
     "mocha": "^1.21.4",
-    "benchmark": "^1.0.0"
+    "benchmark": "^1.0.0",
+    "coffee-script": "^1.8.0",
+    "gulp": "^3.8.7"
   },
   "dependencies": {}
 }
