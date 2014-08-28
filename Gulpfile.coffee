@@ -1,5 +1,6 @@
 fs = require 'fs'
 gulp = require 'gulp'
+gutil = require 'gulp-util'
 {exec} = require 'child_process'
 
 gulp.task 'bump', (callback) ->
@@ -17,8 +18,10 @@ gulp.task 'bump', (callback) ->
   _bump './bower.json'
   _bump './package.json'
 
+  gutil.log "bump to version #{version}"
+
   exec """
   git add --all && git commit -am "#{version}" && git tag "v#{version}"
   """, callback
 
-gulp.task 'default', -> gulp.run 'bump'
+gulp.task 'default', ['bump'], ->
