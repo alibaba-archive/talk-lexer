@@ -16,6 +16,9 @@ Rich text lexer for teambition projects
 # parseDOM
 ```
 
+# TODO
+- add `check` method to validate the input structure
+
 ```
 # text
 ['hello world'] ==> 'hello world'
