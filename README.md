@@ -11,12 +11,23 @@ Rich text lexer for teambition projects
 # Example
 
 ```coffeescript
-# html
-# text
+data = [{type: 'metion', text: "@user", data: {id: '1'}}, ", Hello"]
+
+# data to html
+lexer(data).html()  ==>  '<metion data-id="1">@user</metion>, Hello'
+
+# data to text
+lexer(data).text()  ==>  '@user, Hello'
+
 # parseDOM
+input = document.getElementById('input')
+lex = lexer.parseDOM(input.childNodes)
+lex.html()  ==>  '<metion data-id="1">@user</metion>, Hello'
+lex.text()  ==>  '@user, Hello'
 ```
 
 # TODO
+
 - add `check` method to validate the input structure
 
 ```
