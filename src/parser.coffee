@@ -4,23 +4,23 @@ strParsers =
   mention: (text, opts) ->
     structure = []
     # buffer for the non-match string
-    trunkBuffer = ''
+    sectionBuffer = ''
 
-    text.split('@').forEach (trunk, i) ->
-      # First trunk
-      return trunkBuffer += trunk or '' if i is 0
+    text.split('@').forEach (section, i) ->
+      # First section
+      return sectionBuffer += section or '' if i is 0
       for i, opt of opts
         {match, data} = opt
-        if trunk.indexOf(match) is 0
+        if section.indexOf(match) is 0
           mention = type: 'mention', text: "@#{match}"
           mention.data = data if data?
-          structure.push trunkBuffer, mention
-          # Reset trunk buffer
-          trunkBuffer = trunk[match.length..]
+          structure.push sectionBuffer, mention
+          # Reset section buffer
+          sectionBuffer = section[match.length..]
           return true
-      trunkBuffer += trunk
+      sectionBuffer += section
 
-    structure.push trunkBuffer
+    structure.push sectionBuffer
     return structure
 
 parseDOM = (nodes, options) ->
