@@ -2,11 +2,11 @@ toString = Object.prototype.toString
 
 class Lexer
 
-  constructor: (@data) ->
-    @data = [@data] unless toString.call(data) is '[object Array]'
+  constructor: (@structure) ->
+    @structure = [@structure] unless toString.call(@structure) is '[object Array]'
 
   html: ->
-    @data.map (node) ->
+    @structure.map (node) ->
       return node if toString.call(node) is '[object String]'
       return '' unless node?
       {type, text, data} = node
@@ -17,7 +17,7 @@ class Lexer
     .join ''
 
   text: ->
-    @data.map (node) ->
+    @structure.map (node) ->
       return node if toString.call(node) is '[object String]'
       return '' unless node?
       {type, text, data} = node
@@ -25,9 +25,9 @@ class Lexer
       return text or ''
     .join ''
 
-  toJSON: -> @data
+  toJSON: -> @structure
 
-lexer = (data) -> new Lexer(data)
+lexer = (structure) -> new Lexer(structure)
 lexer.name = 'lexer'
 lexer.version = 1
 
@@ -38,8 +38,8 @@ lexer.whitelist = require './whitelist'
 lexer.parser = require './parser'
 
 lexer.parseDOM = ->
-  data = lexer.parser.parseDOM.apply lexer.parser, arguments
-  new Lexer(data)
+  structure = lexer.parser.parseDOM.apply lexer.parser, arguments
+  new Lexer(structure)
 
 module.exports = lexer
 window?.lexer = lexer

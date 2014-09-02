@@ -4,8 +4,8 @@ lexer = require '../src/lexer'
 util = require './util'
 
 articleHtml = """
-Hello, <metion data-id="1">@Grace</metion>. It's been a long time since we met last time.
-<metion data-id="2">@Bran</metion> is very missing you.
+Hello, <mention data-id="1">@Grace</mention>. It's been a long time since we met last time.
+<mention data-id="2">@Bran</mention> is very missing you.
 """
 
 articleText = """
@@ -16,13 +16,13 @@ Hello, @Grace. It's been a long time since we met last time.
 articleData = [
   'Hello, '
   ,
-    type: 'metion'
+    type: 'mention'
     text: '@Grace'
     data: id: '1'
   ,
   ". It's been a long time since we met last time.\n"
   ,
-    type: 'metion'
+    type: 'mention'
     text: '@Bran'
     data: id: '2'
   ,
@@ -31,9 +31,9 @@ articleData = [
 
 articleNodes = [
   util.createDOM 'Hello, '
-  util.createDOM '@Grace', 'metion', "data-id": "1"
+  util.createDOM '@Grace', 'mention', "data-id": "1"
   util.createDOM ". It's been a long time since we met last time.\n"
-  util.createDOM '@Bran', 'metion', "data-id": "2"
+  util.createDOM '@Bran', 'mention', "data-id": "2"
   util.createDOM ' is very missing you.'
 ]
 
@@ -50,9 +50,9 @@ describe 'main', ->
     lex.html().should.eql 'hello world'
     lex.text().should.eql 'hello world'
 
-    # metion
-    lex = lexer type: 'metion', text: '@user', data: id: '1'
-    lex.html().should.eql '<metion data-id="1">@user</metion>'
+    # mention
+    lex = lexer type: 'mention', text: '@user', data: id: '1'
+    lex.html().should.eql '<mention data-id="1">@user</mention>'
     lex.text().should.eql '@user'
 
     # mix text
@@ -66,9 +66,20 @@ describe 'main', ->
     lexer.parseDOM nodes
     .toJSON().should.eql ['hello world']
 
-    nodes = [util.createDOM '@user', 'metion', "data-id": "1"]
+    nodes = [util.createDOM '@user', 'mention', "data-id": "1"]
     lexer.parseDOM nodes
-    .toJSON().should.eql [{type: 'metion', text: '@user', data: id: '1'}]
+    .toJSON().should.eql [{type: 'mention', text: '@user', data: id: '1'}]
 
     lexer.parseDOM articleNodes
     .toJSON().should.eql articleData
+
+    # pass option params to parseDOM method
+    nodes = [util.createDOM 'Hello @Graceand@Bran Good Afternoon']
+    lexer.parseDOM nodes, mention: [{match: 'Grace', data: id: '1'}, {match: 'Bran', data: id: '2'}]
+    .toJSON().should.eql [
+      'Hello '
+      type: 'mention', text: '@Grace', data: id: '1'
+      'and'
+      type: 'mention', text: '@Bran', data: id: '2'
+      ' Good Afternoon'
+    ]

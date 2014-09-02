@@ -1,2 +1,2 @@
 module.exports =
-  metion: 1
+  mention: 1
