@@ -130,7 +130,7 @@
             return true;
           }
         }
-        return sectionBuffer += section;
+        return sectionBuffer += "@" + section;
       });
       structure.push(sectionBuffer);
       return structure;
