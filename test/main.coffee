@@ -84,6 +84,13 @@ describe 'main', ->
       ' Good Afternoon'
     ]
 
+    # do not break emails
+    nodes = [util.createDOM 'Hello user@gmail.com']
+    lexer.parseDOM nodes, mention: [{match: 'user', data: id: '2'}]
+    .toJSON().should.eql [
+      'Hello user@gmail.com'
+    ]
+
   it 'isValid', ->
     lexer('hello world').isValid().should.eql true
 

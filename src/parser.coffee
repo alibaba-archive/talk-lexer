@@ -18,7 +18,7 @@ strParsers =
           # Reset section buffer
           sectionBuffer = section[match.length..]
           return true
-      sectionBuffer += section
+      sectionBuffer += "@#{section}"
 
     structure.push sectionBuffer
     return structure
