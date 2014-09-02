@@ -61,6 +61,12 @@
       return this.structure;
     };
 
+    Lexer.prototype.isValid = function() {
+      return this.structure.every(function(obj) {
+        return toString.call(obj) === '[object String]' || lexer.whitelist[obj != null ? obj.type : void 0];
+      });
+    };
+
     return Lexer;
 
   })();

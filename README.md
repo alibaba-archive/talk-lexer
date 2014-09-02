@@ -28,6 +28,9 @@ lex.text()  ==>  '@user, Hello'
 # parseDOM with options
 ## lexer will grep the matched username and transfer to a mention tag
 lex = lexer.parseDOM(input.childNodes, mention: [{match: 'Grace', data: id: '1'}])
+
+# validate the data
+lexer({type: 'mention'}).isValid()  ==>  true
 ```
 
 # TODO

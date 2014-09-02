@@ -83,3 +83,12 @@ describe 'main', ->
       type: 'mention', text: '@Bran', data: id: '2'
       ' Good Afternoon'
     ]
+
+  it 'isValid', ->
+    lexer('hello world').isValid().should.eql true
+
+    lexer(['hello world', {type: 'mention', test: '@abc'}]).isValid().should.eql true
+
+    lexer({type: 'men'}).isValid().should.eql false
+
+    lexer([{type: 'men'}]).isValid().should.eql false

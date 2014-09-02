@@ -27,6 +27,10 @@ class Lexer
 
   toJSON: -> @structure
 
+  isValid: ->
+    @structure.every (obj) ->
+      toString.call(obj) is '[object String]' or lexer.whitelist[obj?.type]
+
 lexer = (structure) -> new Lexer(structure)
 lexer.name = 'lexer'
 lexer.version = 1
