@@ -1,5 +1,7 @@
 whitelist = require './whitelist'
 
+invalidNodeType = [8]
+
 strParsers =
   mention: (text, opts) ->
     structure = []
@@ -27,8 +29,10 @@ parseDOM = (nodes, options) ->
   structure = []
   [0...nodes.length].map (i) ->
     node = nodes[i]
-    {tagName} = node
+    {tagName, nodeType} = node
     tagName = tagName.toLowerCase() if tagName?
+
+    return if nodeType in invalidNodeType  # strip comments
 
     # plain text or invalid tags
     unless tagName? and whitelist[tagName]
