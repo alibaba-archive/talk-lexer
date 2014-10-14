@@ -31,9 +31,9 @@ articleData = [
 
 articleNodes = [
   util.createDOM 'Hello, '
-  util.createDOM '@Grace', 'mention', "data-id": "1"
+  util.createDOM '@Grace', 'mention', {}, "data-id": "1"
   util.createDOM ". It's been a long time since we met last time.\n"
-  util.createDOM '@Bran', 'mention', "data-id": "2"
+  util.createDOM '@Bran', 'mention', {}, "data-id": "2"
   util.createDOM ' is very missing you.'
 ]
 
@@ -66,7 +66,7 @@ describe 'main', ->
     lexer.parseDOM nodes
     .toJSON().should.eql ['hello world']
 
-    nodes = [util.createDOM '@user', 'mention', "data-id": "1"]
+    nodes = [util.createDOM '@user', 'mention', {}, "data-id": "1"]
     lexer.parseDOM nodes
     .toJSON().should.eql [{type: 'mention', text: '@user', data: id: '1'}]
 
@@ -99,3 +99,6 @@ describe 'main', ->
     lexer({type: 'men'}).isValid().should.eql false
 
     lexer([{type: 'men'}]).isValid().should.eql false
+
+# Test for different types
+require './type'

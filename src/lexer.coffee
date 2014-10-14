@@ -5,25 +5,9 @@ class Lexer
   constructor: (@structure) ->
     @structure = [@structure] unless toString.call(@structure) is '[object Array]'
 
-  html: ->
-    @structure.map (node) ->
-      return node if toString.call(node) is '[object String]'
-      return '' unless node?
-      {type, text, data} = node
-      return '' unless lexer.whitelist[type]
-      data or= {}
-      attrs = ("data-#{k}=\"#{v}\"" for k, v of data)
-      return "<#{type} #{attrs.join(' ')}>#{text}</#{type}>"
-    .join ''
+  html: -> lexer.stringifier.toHtml @structure
 
-  text: ->
-    @structure.map (node) ->
-      return node if toString.call(node) is '[object String]'
-      return '' unless node?
-      {type, text, data} = node
-      return '' unless lexer.whitelist[type]
-      return text or ''
-    .join ''
+  text: -> lexer.stringifier.toText @structure
 
   toJSON: -> @structure
 
@@ -40,6 +24,7 @@ lexer.whitelist = require './whitelist'
 
 # util functions
 lexer.parser = require './parser'
+lexer.stringifier = require './stringifier'
 
 lexer.parseDOM = ->
   structure = lexer.parser.parseDOM.apply lexer.parser, arguments

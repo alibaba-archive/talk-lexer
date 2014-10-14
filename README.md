@@ -35,14 +35,18 @@ lexer({type: 'mention'}).isValid()  ==>  true
 
 # TODO
 
-- add `check` method to validate the input structure
-
 ```
 # text
-['hello world'] ==> 'hello world'
+['hello world']
+==> 'hello world'
 
 # metion
-[{type: 'metion', text: '@user', data: id: '1'}] ==> '<metion data-id="1">@user</metion>'
+[{type: 'metion', text: '@user', data: id: '1'}]
+==> '<metion data-id="1">@user</metion>'
+
+# link
+[{type: 'link', text: 'Teambition', href: 'https://www.teambition.com'}]
+==> '<a href="https://www.teambition.com" class="lexer-link" rel="noreferrer" target="_blank">Teambition</a>'
 ```
 
 # LICENSE

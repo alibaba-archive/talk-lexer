@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Lexer</title>
     <style>
 .editor {
@@ -19,12 +20,16 @@
   </head>
   <body>
     <div id="editor" class="editor" contenteditable="true">
-      Hello, <metion data-id="1">@Grace</metion>. It's been a long time since we met last time.
-      <metion data-id="2">@Bran</metion> is very missing you.
+      Hello, <mention data-id="1">@Grace</mention>. It's been a long time since we met last time.
+      <mention data-id="2">@Bran</mention> is very missing you.
+      Please visit our website: <a href="https://www.teambition.com" class="lexer-link" rel="noreferrer" target="_blank">Teambition</a>
     </div>
     <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script src="../dist/lexer.min.js"></script>
+    <script src="../dist/lexer.js"></script>
     <script>
+    var editor = document.getElementById('editor');
+    var lex = lexer.parseDOM(editor.childNodes);
+    console.log(lex.toJSON());
     </script>
   </body>
 </html>
