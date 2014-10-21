@@ -1,6 +1,7 @@
 all: dist test
 
 dist:
+	coffee -o lib -c src
 	browserify --bare lib/lexer.js > dist/lexer.js
 	uglifyjs dist/lexer.js > dist/lexer.min.js
 
