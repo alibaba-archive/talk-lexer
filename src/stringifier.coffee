@@ -1,6 +1,8 @@
 whitelist = require './whitelist'
 toString = Object.prototype.toString
 
+_markLink = (str) -> str.replace /(http(s)?:\/\/[\d\w\/\.\%\&\?\=\-\#\:\+\!]+)/g, '<a href="$1" target="_blank">$1</a>'
+
 stringifierMap =
   default: (node) ->
     {type, text, data} = node
@@ -16,9 +18,13 @@ stringifierMap =
     <a href="#{href}" class="lexer-link" rel="noreferrer" target="_blank">#{text}</a>
     """
 
+  text: (node) ->
+    text = node.text or node
+    _markLink(text)
+
 toHtml = (structure) ->
   structure.map (node) ->
-    return node if toString.call(node) is '[object String]'
+    return stringifierMap.text(node) if toString.call(node) is '[object String]'
     return '' unless node?
     {type, text, data} = node
     return '' unless whitelist[type] and typeof stringifierMap[type] is 'function'
