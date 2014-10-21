@@ -100,5 +100,10 @@ describe 'main', ->
 
     lexer([{type: 'men'}]).isValid().should.eql false
 
+  it 'createElement', ->
+    lexer.createElement('mention', '@Grace', data: id: 1).should.eql {type: 'mention', text: '@Grace', data: id: 1}
+    lexer.createElement('link', 'www.baidu.com', href: 'http://www.baidu.com').should.eql {type: 'link', text: 'www.baidu.com', href: 'http://www.baidu.com'}
+    lexer.createElement('undefined', 'hello').should.eql 'hello'
+
 # Test for different types
 require './type'

@@ -1,4 +1,7 @@
 toString = Object.prototype.toString
+whitelist = require './whitelist'
+parser = require './parser'
+stringifier = require './stringifier'
 
 class Lexer
 
@@ -20,11 +23,18 @@ lexer.name = 'lexer'
 lexer.version = 1
 
 # configuration
-lexer.whitelist = require './whitelist'
+lexer.whitelist = whitelist
 
 # util functions
-lexer.parser = require './parser'
-lexer.stringifier = require './stringifier'
+lexer.parser = parser
+lexer.stringifier = stringifier
+
+# Create a structure element
+lexer.createElement = (type, text, props) ->
+  return text unless whitelist[type]
+  ele = type: type, text: text
+  ele[k] = v for k, v of props
+  ele
 
 lexer.parseDOM = ->
   structure = lexer.parser.parseDOM.apply lexer.parser, arguments
