@@ -60,6 +60,10 @@ describe 'main', ->
     lex.html().should.eql articleHtml
     lex.text().should.eql articleText
 
+    # test replacement of url
+    lexer('I am head http://dn-talk.oss.aliyuncs.com/icons/rss@2x.png I am tail')
+    .html().should.eql 'I am head <a href="http://dn-talk.oss.aliyuncs.com/icons/rss@2x.png" target="_blank">http://dn-talk.oss.aliyuncs.com/icons/rss@2x.png</a> I am tail'
+
   it 'parseDOM', ->
 
     nodes = [util.createDOM 'hello world']

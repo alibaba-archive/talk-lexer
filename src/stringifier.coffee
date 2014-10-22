@@ -1,7 +1,8 @@
 whitelist = require './whitelist'
 toString = Object.prototype.toString
 
-_markLink = (str) -> str.replace /(http(s)?:\/\/[\d\w\/\.\%\&\?\=\-\#\:\+\!]+)/g, '<a href="$1" target="_blank">$1</a>'
+_markLink = (str) ->
+  str.replace /(http(s)?:\/\/[^\s]+)/ig, '<a href="$1" target="_blank">$1</a>'
 
 stringifierMap =
   default: (node) ->

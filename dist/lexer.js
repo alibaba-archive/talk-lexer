@@ -238,7 +238,7 @@
   toString = Object.prototype.toString;
 
   _markLink = function(str) {
-    return str.replace(/(http(s)?:\/\/[\d\w\/\.\%\&\?\=\-\#\:\+\!]+)/g, '<a href="$1" target="_blank">$1</a>');
+    return str.replace(/(http(s)?:\/\/[^\s]+)/ig, '<a href="$1" target="_blank">$1</a>');
   };
 
   stringifierMap = {

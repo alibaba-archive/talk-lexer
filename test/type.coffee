@@ -9,7 +9,6 @@ testcase = (text, html, data, nodes) ->
   lex = lexer.parseDOM nodes
   lex.toJSON().should.eql data
 
-
 describe 'mention', ->
 
   text = 'Hello, @someone'
