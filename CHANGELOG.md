@@ -1,3 +1,6 @@
+## 0.1.5
+- convert html tags to entities when using `html()` function
+
 ## 0.1.1
 - add `createElement` function
 

@@ -4,24 +4,27 @@ toString = Object.prototype.toString
 _markLink = (str) ->
   str.replace /(http(s)?:\/\/[^\s]+)/ig, '<a href="$1" target="_blank">$1</a>'
 
+_entities = (str) ->
+  str.replace /[&<>"']/g, (code) -> "&" + {"&":"amp", "<":"lt", ">":"gt", '"':"quot", "'":"apos"}[code] + ";";
+
 stringifierMap =
   default: (node) ->
     {type, text, data} = node
     data or= {}
     attrs = ("data-#{k}=\"#{v}\"" for k, v of data)
-    return "<#{type} #{attrs.join(' ')}>#{text}</#{type}>"
+    return "<#{type} #{attrs.join(' ')}>#{_entities(text)}</#{type}>"
 
   mention: (node) -> stringifierMap.default node
 
   link: (node) ->
     {type, href, text} = node
     return """
-    <a href="#{href}" class="lexer-link" rel="noreferrer" target="_blank">#{text}</a>
+    <a href="#{href}" class="lexer-link" rel="noreferrer" target="_blank">#{_entities(text)}</a>
     """
 
   text: (node) ->
     text = node.text or node
-    _markLink(text)
+    _markLink(_entities(text))
 
 toHtml = (structure) ->
   structure.map (node) ->

@@ -4,7 +4,7 @@ lexer = require '../src/lexer'
 util = require './util'
 
 articleHtml = """
-Hello, <mention data-id="1">@Grace</mention>. It's been a long time since we met last time.
+Hello, <mention data-id="1">@Grace</mention>. It&apos;s been a long time since we met last time.
 <mention data-id="2">@Bran</mention> is very missing you.
 """
 
@@ -54,6 +54,11 @@ describe 'main', ->
     lex = lexer type: 'mention', text: '@user', data: id: '1'
     lex.html().should.eql '<mention data-id="1">@user</mention>'
     lex.text().should.eql '@user'
+
+    # htmlentities
+    lex = lexer '<h1>hi</h1>'
+    lex.html().should.eql '&lt;h1&gt;hi&lt;/h1&gt;'
+    lex.text().should.eql '<h1>hi</h1>'
 
     # mix text
     lex = lexer articleData
