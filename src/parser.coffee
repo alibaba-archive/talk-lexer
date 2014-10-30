@@ -57,7 +57,7 @@ parserMap =
   highlight: (node, opts) ->
     {tagName, nodeType, classList, href, textContent} = node
     tagName = tagName.toLowerCase() if tagName
-    return false unless 'lexer-highlight' in classList and tagName is 'span'
+    return false unless 'lexer-highlight' in classList and tagName is 'em'
 
     type: 'highlight'
     text: textContent

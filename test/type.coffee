@@ -50,13 +50,13 @@ describe 'highlight', ->
 
   text = 'I am blue'
   html = """
-  <span class="lexer-highlight">#{text}</span>
+  <em class="lexer-highlight">#{text}</em>
   """
   data = [
     type: 'highlight'
     text: text
   ]
-  nodes = [util.createDOM text, 'span', classList: ['lexer-highlight']]
+  nodes = [util.createDOM text, 'em', classList: ['lexer-highlight']]
 
   it 'should stringify the highlight block to text and parse the highlight to data', ->
     testcase text, html, data, nodes

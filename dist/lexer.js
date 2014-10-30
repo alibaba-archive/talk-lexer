@@ -184,7 +184,7 @@
       if (tagName) {
         tagName = tagName.toLowerCase();
       }
-      if (!(__indexOf.call(classList, 'lexer-highlight') >= 0 && tagName === 'span')) {
+      if (!(__indexOf.call(classList, 'lexer-highlight') >= 0 && tagName === 'em')) {
         return false;
       }
       return {
@@ -294,7 +294,7 @@
     highlight: function(node) {
       var text, type;
       type = node.type, text = node.text;
-      return "<span class=\"lexer-highlight\">" + text + "</span>";
+      return "<em class=\"lexer-highlight\">" + text + "</em>";
     },
     text: function(node) {
       var text;
