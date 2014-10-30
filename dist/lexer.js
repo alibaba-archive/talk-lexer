@@ -177,6 +177,20 @@
         href: href,
         text: textContent
       };
+    },
+    highlight: function(node, opts) {
+      var classList, href, nodeType, tagName, textContent;
+      tagName = node.tagName, nodeType = node.nodeType, classList = node.classList, href = node.href, textContent = node.textContent;
+      if (tagName) {
+        tagName = tagName.toLowerCase();
+      }
+      if (!(__indexOf.call(classList, 'lexer-highlight') >= 0 && tagName === 'span')) {
+        return false;
+      }
+      return {
+        type: 'highlight',
+        text: textContent
+      };
     }
   };
 
@@ -277,6 +291,11 @@
       type = node.type, href = node.href, text = node.text;
       return "<a href=\"" + href + "\" class=\"lexer-link\" rel=\"noreferrer\" target=\"_blank\">" + (_entities(text)) + "</a>";
     },
+    highlight: function(node) {
+      var text, type;
+      type = node.type, text = node.text;
+      return "<span class=\"lexer-highlight\">" + text + "</span>";
+    },
     text: function(node) {
       var text;
       text = node.text || node;
@@ -330,7 +349,8 @@
 (function() {
   module.exports = {
     mention: 1,
-    link: 1
+    link: 1,
+    highlight: 1
   };
 
 }).call(this);

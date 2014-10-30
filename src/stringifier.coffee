@@ -22,6 +22,12 @@ stringifierMap =
     <a href="#{href}" class="lexer-link" rel="noreferrer" target="_blank">#{_entities(text)}</a>
     """
 
+  highlight: (node) ->
+    {type, text} = node
+    return """
+    <span class="lexer-highlight">#{text}</span>
+    """
+
   text: (node) ->
     text = node.text or node
     _markLink(_entities(text))

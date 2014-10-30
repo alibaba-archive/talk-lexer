@@ -1,3 +1,6 @@
+## 0.1.6
+- add `highlight` type
+
 ## 0.1.5
 - convert html tags to entities when using `html()` function
 

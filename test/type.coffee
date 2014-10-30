@@ -45,3 +45,18 @@ describe 'link', ->
 
   it 'should stringify the link typed data to hyperlink and parse the hyperlink to data', ->
     testcase text, html, data, nodes
+
+describe 'highlight', ->
+
+  text = 'I am blue'
+  html = """
+  <span class="lexer-highlight">#{text}</span>
+  """
+  data = [
+    type: 'highlight'
+    text: text
+  ]
+  nodes = [util.createDOM text, 'span', classList: ['lexer-highlight']]
+
+  it 'should stringify the highlight block to text and parse the highlight to data', ->
+    testcase text, html, data, nodes

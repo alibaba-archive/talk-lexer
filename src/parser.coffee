@@ -54,6 +54,13 @@ parserMap =
     type: 'link'
     href: href
     text: textContent
+  highlight: (node, opts) ->
+    {tagName, nodeType, classList, href, textContent} = node
+    tagName = tagName.toLowerCase() if tagName
+    return false unless 'lexer-highlight' in classList and tagName is 'span'
+
+    type: 'highlight'
+    text: textContent
 
 parseDOM = (nodes, options = {}) ->
   structure = []
