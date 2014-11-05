@@ -35,18 +35,23 @@ lexer({type: 'mention'}).isValid()  ==>  true
 
 # TODO
 
+# Types
 ```
 # text
 ['hello world']
-==> 'hello world'
+==> hello world
 
 # metion
 [{type: 'metion', text: '@user', data: id: '1'}]
-==> '<metion data-id="1">@user</metion>'
+==> <metion data-id="1">@user</metion>
 
 # link
 [{type: 'link', text: 'Teambition', href: 'https://www.teambition.com'}]
-==> '<a href="https://www.teambition.com" class="lexer-link" rel="noreferrer" target="_blank">Teambition</a>'
+==> <a href="https://www.teambition.com" class="lexer-link" rel="noreferrer" target="_blank">Teambition</a>
+
+# highlight
+[{type: 'link', text: 'I am blue'}]
+==> <em class="lexer-highlight">I am blue</em>
 ```
 
 # LICENSE
