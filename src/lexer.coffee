@@ -2,6 +2,7 @@ toString = Object.prototype.toString
 whitelist = require './whitelist'
 parser = require './parser'
 stringifier = require './stringifier'
+pkg = require '../package.json'
 
 class Lexer
 
@@ -20,7 +21,7 @@ class Lexer
 
 lexer = (structure) -> new Lexer(structure)
 lexer.name = 'lexer'
-lexer.version = 1
+lexer.version = pkg.version
 
 # configuration
 lexer.whitelist = whitelist
