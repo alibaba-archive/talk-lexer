@@ -8,8 +8,7 @@ parserMap =
   # And pick the data attributes from 'data-' properties
   default: (node) ->
     {tagName, nodeType, textContent} = node
-    tagName = tagName.toLowerCase() if tagName
-    obj = type: tagName, text: node.textContent
+    obj = type: tagName.toLowerCase(), text: node.textContent
     obj.data = {}
     [0...node.attributes?.length].forEach (i) ->
       attr = node.attributes[i]
@@ -19,8 +18,7 @@ parserMap =
 
   mention: (node, opts) ->
     {tagName, nodeType, textContent} = node
-    tagName = tagName.toLowerCase() if tagName
-    return parserMap.default(node) if tagName is 'mention'
+    return parserMap.default(node) if tagName is 'MENTION'
 
     # If the node have a tagName, it couldn't be plain text
     return false if tagName
@@ -44,20 +42,22 @@ parserMap =
 
     structure.push sectionBuffer
     return structure
+
   link: (node, opts) ->
     {tagName, nodeType, classList, href, textContent} = node
-    tagName = tagName.toLowerCase() if tagName
+    classList or= []
     # Valid lexer link should have a `lexer-link` class
     # And the tagName should be `a`
-    return false unless 'lexer-link' in classList and tagName is 'a'
+    return false unless 'lexer-link' in classList and tagName is 'A'
 
     type: 'link'
     href: href
     text: textContent
+
   highlight: (node, opts) ->
     {tagName, nodeType, classList, href, textContent} = node
-    tagName = tagName.toLowerCase() if tagName
-    return false unless 'lexer-highlight' in classList and tagName is 'em'
+    classList or= []
+    return false unless 'lexer-highlight' in classList and tagName is 'EM'
 
     type: 'highlight'
     text: textContent
@@ -67,10 +67,12 @@ parseDOM = (nodes, options = {}) ->
 
   [0...nodes.length].forEach (i) ->
     node = nodes[i]
-    {nodeType} = node
+    {nodeType, tagName} = node
 
     # Strip comments
     return if nodeType in invalidNodeType
+
+    return structure.push('\n') if tagName is 'BR'
 
     # Apply each whitelist function on the node
     judge = Object.keys(whitelist).some (parserKey) ->
@@ -86,6 +88,7 @@ parseDOM = (nodes, options = {}) ->
     # Then pick the plain text of the node
     unless judge
       text = node.textContent
+      text += '\n' if tagName is 'DIV'
       return if text.length then structure.push(text) else false
 
   return structure

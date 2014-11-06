@@ -1,3 +1,7 @@
+## 0.1.9
+- parse `<br>` and `<div>` to `\n` in `parseDOM` method
+- replace `\n` with `<br>` in `html` method
+
 ## 0.1.6
 - add `highlight` type
 

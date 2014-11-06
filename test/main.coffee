@@ -4,8 +4,7 @@ lexer = require '../src/lexer'
 util = require './util'
 
 articleHtml = """
-Hello, <mention data-id="1">@Grace</mention>. It&apos;s been a long time since we met last time.
-<mention data-id="2">@Bran</mention> is very missing you.
+Hello, <mention data-id="1">@Grace</mention>. It&apos;s been a long time since we met last time.<br><mention data-id="2">@Bran</mention> is very missing you.
 """
 
 articleText = """
@@ -99,6 +98,19 @@ describe 'main', ->
     .toJSON().should.eql [
       'Hello user@gmail.com'
     ]
+
+    # create a dom wrapped with div and br
+    nodes = [
+      util.createDOM 'I am div', 'DIV'
+      util.createDOM '', 'BR'
+    ]
+    lex = lexer.parseDOM nodes
+    lex.toJSON().should.eql [
+      'I am div\n',
+      '\n'
+    ]
+    lex.text().should.eql 'I am div\n\n'
+    lex.html().should.eql 'I am div<br><br>'
 
   it 'isValid', ->
     lexer('hello world').isValid().should.eql true

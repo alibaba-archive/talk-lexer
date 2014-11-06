@@ -7,6 +7,9 @@ _markLink = (str) ->
 _entities = (str) ->
   str.replace /[&<>"']/g, (code) -> "&" + {"&":"amp", "<":"lt", ">":"gt", '"':"quot", "'":"apos"}[code] + ";";
 
+_markNewline = (str) ->
+  str.split('\n').join '<br>'
+
 stringifierMap =
   default: (node) ->
     {type, text, data} = node
@@ -30,7 +33,7 @@ stringifierMap =
 
   text: (node) ->
     text = node.text or node
-    _markLink(_entities(text))
+    _markLink(_markNewline(_entities(text)))
 
 toHtml = (structure) ->
   structure.map (node) ->
