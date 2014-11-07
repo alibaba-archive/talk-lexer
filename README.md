@@ -6,15 +6,15 @@ Rich text lexer for teambition projects
 # Whitelist
 
 - plain text
-- metion
+- mention
 
 # Example
 
 ```coffeescript
-data = [{type: 'metion', text: "@user", data: {id: '1'}}, ", Hello"]
+data = [{type: 'mention', text: "@user", data: {id: '1'}}, ", Hello"]
 
 # data to html
-lexer(data).html()  ==>  '<metion data-id="1">@user</metion>, Hello'
+lexer(data).html()  ==>  '<mention data-id="1">@user</mention>, Hello'
 
 # data to text
 lexer(data).text()  ==>  '@user, Hello'
@@ -22,7 +22,7 @@ lexer(data).text()  ==>  '@user, Hello'
 # parseDOM
 input = document.getElementById('input')
 lex = lexer.parseDOM(input.childNodes)
-lex.html()  ==>  '<metion data-id="1">@user</metion>, Hello'
+lex.html()  ==>  '<mention data-id="1">@user</mention>, Hello'
 lex.text()  ==>  '@user, Hello'
 
 # parseDOM with options
@@ -41,16 +41,16 @@ lexer({type: 'mention'}).isValid()  ==>  true
 ['hello world']
 ==> hello world
 
-# metion
-[{type: 'metion', text: '@user', data: id: '1'}]
-==> <metion data-id="1">@user</metion>
+# mention
+[{type: 'mention', text: '@user', data: id: '1'}]
+==> <mention data-id="1">@user</mention>
 
 # link
 [{type: 'link', text: 'Teambition', href: 'https://www.teambition.com'}]
 ==> <a href="https://www.teambition.com" class="lexer-link" rel="noreferrer" target="_blank">Teambition</a>
 
 # highlight
-[{type: 'link', text: 'I am blue'}]
+[{type: 'highlight', text: 'I am blue'}]
 ==> <em class="lexer-highlight">I am blue</em>
 ```
 
