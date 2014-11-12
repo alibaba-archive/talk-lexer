@@ -9,7 +9,7 @@ Hello, <mention data-id="1">@Grace</mention>. It&apos;s been a long time since w
 
 articleText = """
 Hello, @Grace. It's been a long time since we met last time.
-@Bran is very missing you.
+@Bran is very missing you.\n
 """
 
 articleData = [
@@ -25,7 +25,7 @@ articleData = [
     text: '@Bran'
     data: id: '2'
   ,
-  ' is very missing you.'
+  ' is very missing you.\n'
 ]
 
 articleNodes = [
@@ -33,7 +33,7 @@ articleNodes = [
   util.createDOM '@Grace', 'mention', {}, "data-id": "1"
   util.createDOM ". It's been a long time since we met last time.\n"
   util.createDOM '@Bran', 'mention', {}, "data-id": "2"
-  util.createDOM ' is very missing you.'
+  util.createDOM ' is very missing you.\n'
 ]
 
 describe 'main', ->
@@ -110,7 +110,7 @@ describe 'main', ->
       '\n'
     ]
     lex.text().should.eql 'I am div\n\n'
-    lex.html().should.eql 'I am div<br><br>'
+    lex.html().should.eql 'I am div<br>'
 
   it 'isValid', ->
     lexer('hello world').isValid().should.eql true

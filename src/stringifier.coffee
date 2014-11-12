@@ -36,10 +36,14 @@ stringifierMap =
     _markLink(_markNewline(_entities(text)))
 
 toHtml = (structure) ->
-  structure.map (node) ->
-    return stringifierMap.text(node) if toString.call(node) is '[object String]'
-    return '' unless node?
+  len = structure.length
+  structure.map (node, i) ->
+    if toString.call(node) is '[object String]'
+      node = node.trimRight() if i is (len - 1)  # Trim the \n of last text snippet
+      return stringifierMap.text(node)
+
     {type, text, data} = node
+    return '' unless node?
     return '' unless whitelist[type] and typeof stringifierMap[type] is 'function'
     return stringifierMap[type](node)
   .join ''

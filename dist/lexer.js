@@ -306,15 +306,20 @@
   };
 
   toHtml = function(structure) {
-    return structure.map(function(node) {
+    var len;
+    len = structure.length;
+    return structure.map(function(node, i) {
       var data, text, type;
       if (toString.call(node) === '[object String]') {
+        if (i === (len - 1)) {
+          node = node.trimRight();
+        }
         return stringifierMap.text(node);
       }
+      type = node.type, text = node.text, data = node.data;
       if (node == null) {
         return '';
       }
-      type = node.type, text = node.text, data = node.data;
       if (!(whitelist[type] && typeof stringifierMap[type] === 'function')) {
         return '';
       }
@@ -359,7 +364,7 @@
 
 },{}],5:[function(require,module,exports){
 module.exports={
-  "version": "0.1.9",
+  "version": "0.1.10",
   "main": "./lib/lexer.js",
   "directories": {
     "test": "test"

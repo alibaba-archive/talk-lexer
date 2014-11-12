@@ -1,3 +1,6 @@
+## 0.1.11
+- trim the `\n` and whitespace in the end of string
+
 ## 0.1.9
 - parse `<br>` and `<div>` to `\n` in `parseDOM` method
 - replace `\n` with `<br>` in `html` method
