@@ -28,7 +28,7 @@ stringifierMap =
   highlight: (node) ->
     {type, text} = node
     return """
-    <em class="lexer-highlight">#{text}</em>
+    <em class="lexer-highlight">#{_entities(text)}</em>
     """
 
   text: (node) ->

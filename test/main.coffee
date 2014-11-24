@@ -59,6 +59,11 @@ describe 'main', ->
     lex.html().should.eql '&lt;h1&gt;hi&lt;/h1&gt;'
     lex.text().should.eql '<h1>hi</h1>'
 
+    # htmlentities in the text value
+    lex = lexer([{type: 'highlight', text: '<h1>hi</h1>'}])
+    lex.html().should.eql '<em class="lexer-highlight">&lt;h1&gt;hi&lt;/h1&gt;</em>'
+    lex.text().should.eql '<h1>hi</h1>'
+
     # mix text
     lex = lexer articleData
     lex.html().should.eql articleHtml

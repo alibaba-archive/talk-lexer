@@ -6,7 +6,7 @@ dist:
 	uglifyjs dist/lexer.js > dist/lexer.min.js
 
 bump:
-	gulp bump
+	make dist && gulp bump
 
 test:
 	@NODE_ENV=mocha ./node_modules/.bin/mocha \
