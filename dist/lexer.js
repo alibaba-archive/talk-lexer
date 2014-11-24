@@ -296,7 +296,7 @@
     highlight: function(node) {
       var text, type;
       type = node.type, text = node.text;
-      return "<em class=\"lexer-highlight\">" + text + "</em>";
+      return "<em class=\"lexer-highlight\">" + (_entities(text)) + "</em>";
     },
     text: function(node) {
       var text;
@@ -364,7 +364,7 @@
 
 },{}],5:[function(require,module,exports){
 module.exports={
-  "version": "0.1.10",
+  "version": "0.1.11",
   "main": "./lib/lexer.js",
   "directories": {
     "test": "test"
