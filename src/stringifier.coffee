@@ -2,7 +2,7 @@ whitelist = require './whitelist'
 toString = Object.prototype.toString
 
 _markLink = (str) ->
-  str.replace /(http(s)?:\/\/[^\s]+)/ig, '<a href="$1" target="_blank">$1</a>'
+  str.replace /(http(s)?:\/\/[\x21-\x7F]+)/ig, '<a href="$1" target="_blank">$1</a>'
 
 _entities = (str) ->
   str.replace /[&<>"']/g, (code) -> "&" + {"&":"amp", "<":"lt", ">":"gt", '"':"quot", "'":"apos"}[code] + ";";
