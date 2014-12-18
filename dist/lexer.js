@@ -301,7 +301,7 @@
     text: function(node) {
       var text;
       text = node.text || node;
-      return _markLink(_markNewline(_entities(text)));
+      return _markNewline(_markLink(_entities(text)));
     }
   };
 
@@ -364,7 +364,7 @@
 
 },{}],5:[function(require,module,exports){
 module.exports={
-  "version": "0.1.12",
+  "version": "0.1.14",
   "main": "./lib/lexer.js",
   "directories": {
     "test": "test"
