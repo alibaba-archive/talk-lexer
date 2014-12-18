@@ -33,7 +33,7 @@ stringifierMap =
 
   text: (node) ->
     text = node.text or node
-    _markLink(_markNewline(_entities(text)))
+    _markNewline(_markLink(_entities(text)))
 
 toHtml = (structure) ->
   len = structure.length

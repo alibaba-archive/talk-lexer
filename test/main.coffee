@@ -73,6 +73,9 @@ describe 'main', ->
     lexer('I am head http://dn-talk.oss.aliyuncs.com/icons/rss@2x.png I am tail')
     .html().should.eql 'I am head <a href="http://dn-talk.oss.aliyuncs.com/icons/rss@2x.png" target="_blank">http://dn-talk.oss.aliyuncs.com/icons/rss@2x.png</a> I am tail'
 
+    lexer('开博客可以查看详细：http://t.cn/Rz3I0cX\n小艾:)')
+    .html().should.eql '开博客可以查看详细：<a href="http://t.cn/Rz3I0cX" target="_blank">http://t.cn/Rz3I0cX</a><br>小艾:)'
+
   it 'parseDOM', ->
 
     nodes = [util.createDOM 'hello world']
