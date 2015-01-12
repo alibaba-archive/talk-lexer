@@ -88,8 +88,9 @@ parseDOM = (nodes, options = {}) ->
     # Then pick the plain text of the node
     unless judge
       text = node.textContent
+      return unless text.length
       text += '\n' if tagName is 'DIV'
-      return if text.length then structure.push(text) else false
+      return structure.push(text)
 
   return structure
 

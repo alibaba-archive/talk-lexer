@@ -6,12 +6,27 @@ pkg = require '../package.json'
 
 class Lexer
 
+  _trimStruct = (structure) ->
+    _struct = []
+    tmpNewLines = ''
+    structure.forEach (struct, i) ->
+      if toString.call(struct) is '[object String]'
+        if struct.trim().length is 0  # Empty field, maybe \n
+          return unless _struct.length  # Do not save the empty field before non-empty charactors
+          return tmpNewLines += struct
+      if tmpNewLines.length
+        _struct.push tmpNewLines
+        tmpNewLines = ''
+      _struct.push struct
+    _struct
+
   constructor: (@structure) ->
     @structure = [@structure] unless toString.call(@structure) is '[object Array]'
+    @structure = _trimStruct(@structure)
 
   html: -> lexer.stringifier.toHtml @structure
 
-  text: -> lexer.stringifier.toText @structure
+  text: -> lexer.stringifier.toText(@structure).trim()
 
   toJSON: -> @structure
 

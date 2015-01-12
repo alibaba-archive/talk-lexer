@@ -9,7 +9,7 @@ Hello, <mention data-id="1">@Grace</mention>. It&apos;s been a long time since w
 
 articleText = """
 Hello, @Grace. It's been a long time since we met last time.
-@Bran is very missing you.\n
+@Bran is very missing you.
 """
 
 articleData = [
@@ -107,18 +107,33 @@ describe 'main', ->
       'Hello user@gmail.com'
     ]
 
-    # create a dom wrapped with div and br
+    # Create a dom wrapped with div and br
     nodes = [
       util.createDOM 'I am div', 'DIV'
       util.createDOM '', 'BR'
+      util.createDOM '.', 'DIV'
     ]
     lex = lexer.parseDOM nodes
     lex.toJSON().should.eql [
       'I am div\n',
       '\n'
+      '.\n'
     ]
-    lex.text().should.eql 'I am div\n\n'
-    lex.html().should.eql 'I am div<br>'
+    lex.text().should.eql 'I am div\n\n.'
+    lex.html().should.eql 'I am div<br><br>.'
+
+    # Trim the empty dom before or after content
+    nodes = [
+      util.createDOM '', 'BR'
+      util.createDOM '', 'DIV'
+      util.createDOM "Hello", 'DIV'
+      util.createDOM 'World', 'DIV'
+      util.createDOM '', 'BR'
+    ]
+    lex = lexer.parseDOM nodes
+    lex.toJSON().should.eql ['Hello\n', 'World\n']
+    lex.text().should.eql 'Hello\nWorld'
+    lex.html().should.eql 'Hello<br>World'
 
   it 'isValid', ->
     lexer('hello world').isValid().should.eql true
