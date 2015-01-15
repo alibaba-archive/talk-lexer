@@ -336,7 +336,7 @@
       var data, text, type;
       if (toString.call(node) === '[object String]') {
         if (i === (len - 1)) {
-          node = node.trimRight();
+          node = node.replace(/\s+$/, '');
         }
         return stringifierMap.text(node);
       }
@@ -388,7 +388,7 @@
 
 },{}],5:[function(require,module,exports){
 module.exports={
-  "version": "0.1.15",
+  "version": "0.1.16",
   "main": "./lib/lexer.js",
   "directories": {
     "test": "test"
