@@ -39,7 +39,7 @@ toHtml = (structure) ->
   len = structure.length
   structure.map (node, i) ->
     if toString.call(node) is '[object String]'
-      node = node.trimRight() if i is (len - 1)  # Trim the \n of last text snippet
+      node = node.replace /\s+$/, '' if i is (len - 1)
       return stringifierMap.text(node)
 
     {type, text, data} = node
