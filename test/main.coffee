@@ -109,18 +109,22 @@ describe 'main', ->
 
     # Create a dom wrapped with div and br
     nodes = [
-      util.createDOM 'I am div', 'DIV'
+      util.createDOM 'text', 'span'
+      util.createDOM 'div1', 'DIV'
+      util.createDOM 'div2', 'DIV'
       util.createDOM '', 'BR'
-      util.createDOM '.', 'DIV'
+      util.createDOM 'tail', 'DIV'
     ]
     lex = lexer.parseDOM nodes
     lex.toJSON().should.eql [
-      'I am div\n',
+      'text'
+      '\ndiv1\n',
+      'div2\n'
       '\n'
-      '.\n'
+      'tail\n'
     ]
-    lex.text().should.eql 'I am div\n\n.'
-    lex.html().should.eql 'I am div<br><br>.'
+    lex.text().should.eql 'text\ndiv1\ndiv2\n\ntail'
+    lex.html().should.eql 'text<br>div1<br>div2<br><br>tail'
 
     # Trim the empty dom before or after content
     nodes = [
