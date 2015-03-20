@@ -89,7 +89,7 @@ parseDOM = (nodes, options = {}) ->
     unless judge
       text = node.textContent
       return unless text.length
-      if tagName is 'DIV'
+      if tagName in ['DIV', 'P', 'BLOCKQUOTE', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'LI']
         # Append \n when use div at first place
         # Or the pre tag is end up with \n
         if i is 0 or structure[structure.length - 1]?[-1..] is '\n'

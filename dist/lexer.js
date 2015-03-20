@@ -249,7 +249,7 @@
         if (!text.length) {
           return;
         }
-        if (tagName === 'DIV') {
+        if (tagName === 'DIV' || tagName === 'P' || tagName === 'BLOCKQUOTE' || tagName === 'H1' || tagName === 'H2' || tagName === 'H3' || tagName === 'H4' || tagName === 'H5' || tagName === 'H6' || tagName === 'LI') {
           if (i === 0 || ((_ref = structure[structure.length - 1]) != null ? _ref.slice(-1) : void 0) === '\n') {
             text += '\n';
           } else {
@@ -392,7 +392,7 @@
 
 },{}],5:[function(require,module,exports){
 module.exports={
-  "version": "0.1.18",
+  "version": "0.1.19",
   "main": "./lib/lexer.js",
   "directories": {
     "test": "test"
