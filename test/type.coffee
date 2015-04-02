@@ -1,11 +1,12 @@
 util = require './util'
 lexer = require '../src/lexer'
 
-testcase = (text, html, data, nodes) ->
+stringify = (text, html, data, nodes) ->
   lex = lexer(data)
   lex.html().should.eql html
   lex.text().should.eql text
 
+parse = (text, html, data, nodes) ->
   lex = lexer.parseDOM nodes
   lex.toJSON().should.eql data
 
@@ -20,7 +21,7 @@ describe 'mention', ->
   ,
     type: 'mention'
     text: '@someone'
-    data: id: 1
+    data: id: "1"
   ]
   nodes = [
     util.createDOM 'Hello, '
@@ -28,7 +29,8 @@ describe 'mention', ->
   ]
 
   it 'should stringify the mention typed data to mention tag and parse the mention tag to data', ->
-    testcase text, html, data, nodes
+    stringify text, html, data, nodes
+    parse text, html, data, nodes
 
 describe 'link', ->
 
@@ -44,7 +46,8 @@ describe 'link', ->
   nodes = [util.createDOM text, 'a', href: 'https://www.teambition.com', classList: ['lexer-link']]
 
   it 'should stringify the link typed data to hyperlink and parse the hyperlink to data', ->
-    testcase text, html, data, nodes
+    stringify text, html, data, nodes
+    parse text, html, data, nodes
 
 describe 'highlight', ->
 
@@ -59,4 +62,20 @@ describe 'highlight', ->
   nodes = [util.createDOM text, 'em', classList: ['lexer-highlight']]
 
   it 'should stringify the highlight block to text and parse the highlight to data', ->
-    testcase text, html, data, nodes
+    stringify text, html, data, nodes
+    parse text, html, data, nodes
+
+describe 'bold', ->
+
+  text = 'I am bold'
+  html = """
+  <strong class="lexer-bold">#{text}</strong>
+  """
+  data = [
+    type: 'bold'
+    text: text
+  ]
+  nodes = [util.createDOM text, 'strong', classList: ['lexer-bold']]
+
+  it 'should stringify the bold block to text', ->
+    stringify text, html, data, nodes

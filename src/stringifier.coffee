@@ -31,6 +31,12 @@ stringifierMap =
     <em class="lexer-highlight">#{_entities(text)}</em>
     """
 
+  bold: (node) ->
+    {type, text} = node
+    return """
+    <strong class="lexer-bold">#{text}</strong>
+    """
+
   text: (node) ->
     text = node.text or node
     _markNewline(_markLink(_entities(text)))
