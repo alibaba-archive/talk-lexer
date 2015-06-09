@@ -1,12 +1,12 @@
 {
-  "version": "0.1.22",
+  "version": "0.1.23",
   "main": "./lib/lexer.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
     "test": "make test",
-    "prepublish": "make dist && rm -rf lib && coffee -o lib -c src"
+    "prepublish": "rm -rf lib && coffee -o lib -c src && make dist"
   },
   "license": "MIT",
   "author": "teambition",
