@@ -5,7 +5,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "make test"
+    "test": "make test",
+    "prepublish": "make dist && rm -rf lib && coffee -o lib -c src"
   },
   "license": "MIT",
   "author": "teambition",
