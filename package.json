@@ -9,7 +9,7 @@
   },
   "license": "MIT",
   "author": "teambition",
-  "name": "lexer",
+  "name": "talk-lexer",
   "repository": {
     "type": "git",
     "url": "git@code.teambition.com:project/lexer.git"
